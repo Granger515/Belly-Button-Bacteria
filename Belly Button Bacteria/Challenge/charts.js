@@ -57,21 +57,17 @@ function buildMetadata(sample) {
 // Deliverable 1: 1. Create the buildChart function.
 function buildCharts(sample) {
   // Deliverable 1: 2. Use d3.json to load the samples.json file 
+  
   d3.json("samples.json").then((data) => {
     console.log(data);
 
     // Deliverable 1: 3. Create a variable that holds the samples array. 
 
-  var samplesArray = d3.json("samples.json");
-
-  console.log(samplesArray);
+    var samplesArray = data.samples;
 
     // Deliverable 1: 4. Create a variable that filters the samples for the object with the desired sample number.
-  var top10bacIDs = d3.json("samples.json").then(function(data){
-    bacfreq = data.samples.map(id => id.bacfreq).sort((a,b) => b - a);
-    filteredbacfreq = bacfreq.slice(0, 10);
-    console.log(filteredbacfreq);
-  });
+
+    samplesArray.filter(samples())
 
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
 

@@ -82,7 +82,7 @@ function buildCharts(sample) {
     var otu_ids = bobDict.otu_ids;
     var otu_labels = bobDict.otu_labels;
     var sample_values = bobDict.sample_values;
-    
+
     console.log(bobDict);
 
     console.log("otu_ids", otu_ids);
@@ -106,8 +106,8 @@ function buildCharts(sample) {
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = {
       type: "bar",
-      xaxis: sample_valuesSlice,
-      yaxis: yticks,
+      x: sample_valuesSlice,
+      y: yticks,
       orientation: "h"
   };
 
@@ -122,10 +122,28 @@ function buildCharts(sample) {
 
     // Deliverable 2: 1. Create the trace for the bubble chart.
 
+    var bubbleData = {
+      mode: "markers",
+      x: otu_ids,
+      y: sample_values,
+      text: otu_labels,
+      marker: {
+        color: otu_ids,
+        size: sample_values
+      }
+  };
+
     // Deliverable 2: 2. Create the layout for the bubble chart.
+
+    var bubbleLayout = {
+      title: "Bacteria Cultures Per Sample"
+    };
+
 
     // Deliverable 2: 3. Use Plotly to plot the data with the layout.
     
+    Plotly.newPlot("bubble", [bubbleData], bubbleLayout);
+
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
 
     // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array.

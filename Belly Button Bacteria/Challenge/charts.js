@@ -105,10 +105,10 @@ function buildCharts(sample) {
 
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = {
-      type: 'bar',
-      xaxis: sample_valuesSlice, 
+      type: "bar",
+      xaxis: sample_valuesSlice,
       yaxis: yticks,
-      orientation: 'h'
+      orientation: "h"
   };
 
     // Deliverable 1: 9. Create the layout for the bar chart. 
@@ -118,7 +118,7 @@ function buildCharts(sample) {
 
     // Deliverable 1: 10. Use Plotly to plot the data with the layout. 
 
-    Plotly.newPlot("bar", barData, barLayout);
+    Plotly.newPlot("bar", [barData], barLayout);
 
     // Deliverable 2: 1. Create the trace for the bubble chart.
 

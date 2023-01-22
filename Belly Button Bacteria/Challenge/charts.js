@@ -66,53 +66,71 @@ function buildCharts(sample) {
 
     var samplesArray = data.samples;
     
-    console.log('samples', sample)
+    console.log('samples', samplesArray)
 
     // Deliverable 1: 4. Create a variable that filters the samples for the object with the desired sample number.
 
-    console.log(samplesArray.map(otu_ids => otu_ids.samples).sort((a,b) => b - a).filter().slice(0,10));
-
-    // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
-
-
-
+    //Gets the data in samples obj for the study participant in the pulldown menu with the appropriate id
+    var bob = (samplesArray.filter(x => x["id"] === sample));
+    
     // Deliverable 1: 5. Create a variable that holds the first sample in the array.
-
-
-
-    // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array.
-
-
-
+    //taking the json out of the array in the id of interest
+    var bobDict = bob[0];
+    
     // Deliverable 1: 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
+    //creating variables for each data array from bobDict
+    var otu_ids = bobDict.otu_ids;
+    var otu_labels = bobDict.otu_labels;
+    var sample_values = bobDict.sample_values;
+    
+    console.log(bobDict);
 
+    console.log("otu_ids", otu_ids);
+    console.log("otu_labels", otu_labels);
+    console.log("sample_values", sample_values);
 
-
-    // Deliverable 3: 3. Create a variable that holds the washing frequency.
-
+    var otu_idsSlice = otu_ids.slice(0,10).reverse();
+    var otu_labelsSlice = otu_labels.slice(0,10).reverse();
+    var sample_valuesSlice = sample_values.slice(0,10).reverse();
+    
+    console.log("otu_idsSlice", otu_idsSlice);
+    console.log("otu_labelsSlice", otu_labelsSlice);
+    console.log("sample_valuesSlice", sample_valuesSlice);
 
     // Deliverable 1: 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order 
     // so the otu_ids with the most bacteria are last. 
-    //var yticks = 
+    var yticks = otu_idsSlice.map(x=>`otu ${x}`);
+    console.log("yticks", yticks)
 
     // Deliverable 1: 8. Create the trace for the bar chart. 
-    //var barData = [
-
-    //];
+    var barData = {
+      type: 'bar',
+      xaxis: sample_valuesSlice, 
+      yaxis: yticks,
+      orientation: 'h'
+  };
 
     // Deliverable 1: 9. Create the layout for the bar chart. 
-    //var barLayout = {
-
-    //};
+    var barLayout = {
+      title: "Top 10 Bacteria Cultures Found"
+    };
 
     // Deliverable 1: 10. Use Plotly to plot the data with the layout. 
+
+    Plotly.newPlot("bar", barData, barLayout);
 
     // Deliverable 2: 1. Create the trace for the bubble chart.
 
     // Deliverable 2: 2. Create the layout for the bubble chart.
 
     // Deliverable 2: 3. Use Plotly to plot the data with the layout.
+    
+    // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
+
+    // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array.
+
+    // Deliverable 3: 3. Create a variable that holds the washing frequency.
     
     // Deliverable 3: 4. Create the trace for the gauge chart.
     

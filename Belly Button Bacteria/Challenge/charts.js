@@ -167,19 +167,31 @@ function buildCharts(sample) {
 
     // Deliverable 3: 4. Create the trace for the gauge chart.
 
-    // var data = [
-    //   {
-    //     domain: { x: [0, 1], y: [0, 1] },
-    //     value: 270,
-    //     title: { text: "Speed" },
-    //     type: "indicator",
-    //     mode: "gauge+number"
-    //   }
-    // ];
+    var data = [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: frequency,
+        title: { text: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week"},
+        type: "indicator",
+        mode: "gauge+number",
+        gauge: {
+          axis: { range: [null, 10] },
+          bar: {color: "black" },
+          steps: [
+            { range: [0, 2], color: "red" },
+            { range: [2, 4], color: "orange" },
+            { range: [4, 6], color: "yellow" },
+            { range: [6, 8], color: "light green"},
+            { range: [8, 10], color: "green" }
+          ],
+        }
+      }
+    ];
     
     // Deliverable 3: 5. Create the layout for the gauge chart.
+    var layout ={ width: 500, height: 420, margin: { t: 0, b: 0 } };
 
     // Deliverable 3: 6. Use Plotly to plot the gauge data and layout.
-
+    Plotly.newPlot('gauge', data, layout);
   });
 }

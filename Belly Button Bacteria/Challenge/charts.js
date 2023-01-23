@@ -85,9 +85,9 @@ function buildCharts(sample) {
 
     console.log(bobDict);
 
-    console.log("otu_ids", otu_ids);
-    console.log("otu_labels", otu_labels);
-    console.log("sample_values", sample_values);
+    // console.log("otu_ids", otu_ids);
+    // console.log("otu_labels", otu_labels);
+    // console.log("sample_values", sample_values);
 
     var otu_idsSlice = otu_ids.slice(0,10).reverse();
     var otu_labelsSlice = otu_labels.slice(0,10).reverse();
@@ -121,6 +121,7 @@ function buildCharts(sample) {
     Plotly.newPlot("bar", [barData], barLayout);
 
     // Deliverable 2: 1. Create the trace for the bubble chart.
+    
 
     var bubbleData = {
       mode: "markers",
@@ -129,8 +130,8 @@ function buildCharts(sample) {
       text: otu_labels,
       marker: {
         color: otu_ids,
-        colorscale: 'Earth',
-        size: sample_values
+        size: sample_values,
+        colorscale: "Earth"
       }
   };
 
@@ -150,11 +151,31 @@ function buildCharts(sample) {
 
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
 
+    var metaArray = data.metadata;
+
+    console.log("metaArray", metaArray)
+    
+    var notbob = (metaArray.filter(y => y["id"] === sample));
+
+    console.log("notbob", notbob)
+
     // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array.
 
+
     // Deliverable 3: 3. Create a variable that holds the washing frequency.
-    
+
+
     // Deliverable 3: 4. Create the trace for the gauge chart.
+
+    // var data = [
+    //   {
+    //     domain: { x: [0, 1], y: [0, 1] },
+    //     value: 270,
+    //     title: { text: "Speed" },
+    //     type: "indicator",
+    //     mode: "gauge+number"
+    //   }
+    // ];
     
     // Deliverable 3: 5. Create the layout for the gauge chart.
 

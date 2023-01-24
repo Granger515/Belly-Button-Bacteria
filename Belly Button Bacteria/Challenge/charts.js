@@ -93,9 +93,9 @@ function buildCharts(sample) {
     var otu_labelsSlice = otu_labels.slice(0,10).reverse();
     var sample_valuesSlice = sample_values.slice(0,10).reverse();
     
-    console.log("otu_idsSlice", otu_idsSlice);
-    console.log("otu_labelsSlice", otu_labelsSlice);
-    console.log("sample_valuesSlice", sample_valuesSlice);
+    // console.log("otu_idsSlice", otu_idsSlice);
+    // console.log("otu_labelsSlice", otu_labelsSlice);
+    // console.log("sample_valuesSlice", sample_valuesSlice);
 
     // Deliverable 1: 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order 
@@ -142,46 +142,42 @@ function buildCharts(sample) {
       hovermode: "x unified"
     };
 
-
     // Deliverable 2: 3. Use Plotly to plot the data with the layout.
     
     Plotly.newPlot("bubble", [bubbleData], bubbleLayout);
-
-
 
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
 
     var metaArray = data.metadata;
 
-    console.log("metaArray", metaArray)
-    
-    var notbob = (metaArray.filter(y => y["id"] === sample));
-
-    console.log("notbob", notbob)
+    console.log("metaArray", metaArray);
 
     // Deliverable 3: 2. Create a variable that holds the first sample in the metadata array.
-
+    var notbob = metaArray.filter(sampleObj => sampleObj.id == sample);
+    
+    console.log("notbob", notbob);
 
     // Deliverable 3: 3. Create a variable that holds the washing frequency.
-
+    var wfreq = parseFloat(notbob[0].wfreq);
+    console.log("wfreq", wfreq);
 
     // Deliverable 3: 4. Create the trace for the gauge chart.
 
     var data = [
       {
         domain: { x: [0, 1], y: [0, 1] },
-        value: frequency,
+        value: wfreq,
         title: { text: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week"},
         type: "indicator",
         mode: "gauge+number",
         gauge: {
           axis: { range: [null, 10] },
-          bar: {color: "black" },
+          bar: {color: "black", width: 4 },
           steps: [
             { range: [0, 2], color: "red" },
             { range: [2, 4], color: "orange" },
             { range: [4, 6], color: "yellow" },
-            { range: [6, 8], color: "light green"},
+            { range: [6, 8], color: "lime"},
             { range: [8, 10], color: "green" }
           ],
         }
@@ -189,7 +185,7 @@ function buildCharts(sample) {
     ];
     
     // Deliverable 3: 5. Create the layout for the gauge chart.
-    var layout ={ width: 500, height: 420, margin: { t: 0, b: 0 } };
+    var layout ={ width: 500, height: 450, margin: { t: 0, b: 0 } };
 
     // Deliverable 3: 6. Use Plotly to plot the gauge data and layout.
     Plotly.newPlot('gauge', data, layout);
